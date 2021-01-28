@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <title>Insurance Management System</title>
+    <link rel="icon" href="/life-insurance.svg" type="image/icon type">
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/dashboard">IMS</a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="nav navbar-nav">
+                        <% if(user.role==="Admin"){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/manage">Manage User<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/policy/manage">Manage Policy<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/policy/approve">Approve Policies<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/feedback">Feedback<span class="sr-only">(current)</span></a>
+                        </li>
+                        <%}else if(user.role==="Agent"){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/policy/mypolicy">My Policy<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/policy/listpolicy">List Policy<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/feedback">Feedback<span class="sr-only">(current)</span></a>
+                        </li>
+                        <%}else if(user.role==="Customer"){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/find/policy">My Policy<span class="sr-only">(current)</span></a>
+                        </li>
+                        <%if(user.policy.length>0){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/policy/getpolicy">View Policies<span class="sr-only">(current)</span></a>
+                        </li>
+                        <%}else{%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/policy/getpolicy">Get Policies<span class="sr-only">(current)</span></a>
+                        </li>
+                        <%}%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/feedback">Feedback<span class="sr-only">(current)</span></a>
+                        </li>
+                        <%}%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/get/<%=user._id%>">Edit Profile<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/logout">Logout<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+        </nav>
+        <div class="container">

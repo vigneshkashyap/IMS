@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3">Login</h1>               
+                <form action="/users/login" method="POST">
+                    <div class="input-group mb-3 form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">E-Mail:</span>
+                        </div>
+                        <input type="email" name="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">Password:</span>
+                        </div>
+                        <input type="password" name="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <p class="lead mt-4">Do not have an Account? <a href="/users/register">Register</a></p>
+        </div>
+    </div>
+</div>
+<%- include("partials/footer") %>

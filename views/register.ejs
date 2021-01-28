@@ -1,0 +1,93 @@
+<% if(user=="Invalid"){ %>
+<%- include("partials/header") %>
+<%}else if(user!=="Invalid"){%>
+  <%- include("partials/nav", {user: user}) %>
+<%}%>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <% if(user.role=="Admin"){ %>
+          <h1 class="text-center mb-3">Add User</h1>  
+        <%}else{%>
+        <h1 class="text-center mb-3">Register</h1>
+        <%} %>
+        <%if(message.length>0){ %>
+          <p><%= message%></p>
+        <%}%>
+            <form action="/users/register" method="POST">
+                <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="role" id="option1" value="Customer" checked required> Customer
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="role" id="option2" value="Agent"> Agent
+                    </label>
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">First and Last name</span>
+                    </div>
+                    <input type="text" name="FirstName" aria-label="First name" class="form-control">
+                    <input type="text" name="LastName" aria-label="Last name" class="form-control">
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Phone No:</span>
+                    </div>
+                    <input type="text" id="phone" name="phone" pattern="[6-9]{1}[0-9]{9}" minlength="10" maxlength="10" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" oninvalid="this.setCustomValidity('Enter Valid Indian Phone No')"
+                    oninput="this.setCustomValidity('')"  required>
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">E-Mail Address:</span>
+                    </div>
+                    <input type="email" name="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                </div>
+
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Password:</span>
+                    </div>
+                    <input type="password" name="password" pattern=".{8,}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" oninvalid="this.setCustomValidity('Password has to be min 8 characters')"
+                    oninput="this.setCustomValidity('')"  required>
+                </div>
+                <div class="btn-group btn-group-toggle form-group" data-toggle="buttons">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Gender</span>
+                    </div>
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="Gender" id="option1" value="Male" checked required> Male
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="Gender" id="option2" value="Female"> Female
+                    </label>
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">PAN:</span>
+                    </div>
+                    <input type="text" name="pan" class="form-control" pattern="[a-zA-Z0-9]+" minlength="10" maxlength="10" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" oninvalid="this.setCustomValidity('Enter Valid PAN')"
+                    oninput="this.setCustomValidity('')" required>
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth:</span>
+                    </div>
+                    <input type="date" name="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                </div>
+                <% if(user.role!=="Admin"){ %>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Accept Terms & Conditions</label>
+                </div>
+                <%} %>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+            <% if(user.role!=="Admin"){ %>
+            <p class="lead mt-4">Have An Account? <a href="/users/login">Login</a></p>
+            <%}%>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/footer") %>

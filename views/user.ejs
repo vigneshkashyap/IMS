@@ -1,0 +1,83 @@
+<%- include("partials/nav", {user: user}) %>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center">Personal Details</h1>
+            <form class="form-group" action="/users/get/<%= person._id %>?_method=PUT" method="POST">
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Name</span>
+                    </div>
+                    <input type="text" name="name" aria-label="First name" class="form-control" value="<%=person.name%>">
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">E-Mail Address:</span>
+                    </div>
+                    <input type="email" name="email" value="<%=person.email%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Phone No:</span>
+                    </div>
+                    <input type="text" id="phone" name="phone" pattern="[6-9]{1}[0-9]{9}" class="form-control" value="<%=person.phone%>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" oninvalid="this.setCustomValidity('Enter Valid Indian Phone No')"
+                    oninput="this.setCustomValidity('')"  required>
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">PAN:</span>
+                    </div>
+                    <input type="text" name="PAN" value="<%=person.PAN%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth:</span>
+                    </div>
+                    <input type="text" name="policy" value="<%=person.DOB.toDateString()%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <%if(person.policy.length>0 && user.role=="Admin" && person.role=="Customer"){%>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Policy:</span>
+                    </div>
+                    <input type="text" readonly="trues" name="policy" value="<%=policy%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3 form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Registered Date:</span>
+                    </div>
+                    <input type="text" readonly="true" value="<%=dateofreg%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <%}else if(person.policy.length>0){%>
+                    <div class="input-group mb-3 form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Policy:</span>
+                        </div>
+                        <input type="text" class="text-center" readonly="readonly" name="policy" value="<%=policy%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3 form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Registered Date:</span>
+                        </div>
+                        <input type="text" readonly="readonly" value="<%=dateofreg%>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                <%}%>
+                <div class="form-group form-check text-center">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Confirm Updation</label>
+                </div>
+                <button class="btn btn-success btn-block">Update</button>
+            </form>
+            <%if(user.role=="Admin"){%>
+            <form class="form-group" id="delete" action="/users/get/<%= person._id %>?_method=DELETE" method="POST">
+                <div class="form-group form-check text-center">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Confirm Deletion</label>
+                </div>
+                <button class="btn btn-danger btn-block">Delete</button> 
+            </form>
+            <%}%>
+        </div>
+    </div>
+</div>
+<%- include("partials/footer") %>

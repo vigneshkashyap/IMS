@@ -1,0 +1,35 @@
+<%- include("partials/nav", {user: user}) %>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <h1 class="text-center mb-3">Manage Policy</h1>
+    </div>
+</div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"><a href="/policy/manage?sorted=name">Name</a></th>
+            <th scope="col"><a href="/policy/manage?sorted=validity">Validity</a></th>
+            <th scope="col"><a href="/policy/manage?sorted=company">Company</a></th>
+            <th scope="col"><a href="/policy/manage?sorted=cost">Cost</a></th>
+            <th scope="col"><a href="/policy/manage?sorted=AgentName">AgentName</a></th>
+        </tr>
+    </thead>
+    <tbody>
+    <% let c=1 %>
+    <% for(let i=0; i<policy.length; i++){ %>
+        <% if(policy[i].approve==1){%>
+    <tr>
+        <th scope="row"><%= c++ %></th>
+        <td><a href="/policy/get/<%= policy[i]._id %>"><%= policy[i].name%></a></td>
+        <td><%= policy[i].validity %> years</td>
+        <td><%= policy[i].company%></td>
+        <td>₹ <%= policy[i].cost%></td>
+        <td><%= policy[i].AgentName %></td>
+    </tr>
+    <% }} %>
+    </tbody>
+</table>
+
+<%- include("partials/footer") %>

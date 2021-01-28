@@ -1,0 +1,48 @@
+<%- include("partials/nav", {user: user}) %>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <h1 class="text-center mb-3">Manage Policy</h1>
+    </div>
+</div>
+</div>
+<div class="col-md-2 m-auto">
+    <div class='text-center'>
+        <form action="/users/add" method="GET">
+            <button class="btn btn-primary">Add User</button>
+        </form>
+    </div>
+</div>
+<br>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Phone No.</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">PAN</th>
+        <th scope="col">DOB</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% let c=1 %>
+    <% for(let i=0; i<people.length; i++){ %>
+        <% if(people[i].role!=="Admin"){%>
+    <tr>
+        <th scope="row"><%=c++%></th>
+        <td><a href="/users/get/<%= people[i]._id %>"><%= people[i].name%></a></td>
+        <td><%= people[i].role %></td>
+        <td><%= people[i].phone%></td>
+        <td><%= people[i].email %></td>
+        <td><%= people[i].gender%></td>
+        <td><%= people[i].PAN%></td>
+        <td><%= people[i].DOB.toDateString()%></td>
+    </tr>
+        <%}%>
+    <% } %>
+    </tbody>
+</table>
+
+<%- include("partials/footer") %>

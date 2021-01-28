@@ -1,0 +1,45 @@
+<%- include("partials/nav", {user: user}) %>
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <h1 class="text-center mb-3">Approve Policy:</h1>
+    </div>
+</div>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Validity</th>
+        <th scope="col">Company</th>
+        <th scope="col">Cost</th>
+        <th scope="col">AgentName</th>
+        <th scope="col">Approve</th>
+        <th scope="col">Deny</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% let c=1 %>
+    <% for(let i=0; i<policy.length; i++){ %>
+        <% if(policy[i].approve==0){%>
+    <tr>
+        <th scope="row"><%=c++%></th>
+        <td><a href="/policy/get/<%= policy[i]._id %>"><%= policy[i].name%></a></td>
+        <td><%= policy[i].validity %> years</td>
+        <td><%= policy[i].company%></td>
+        <td>₹ <%= policy[i].cost%></td>
+        <td><%= policy[i].AgentName %></td>
+        <td><form class="form-group" id="confirm" action="/policy/get/<%= policy[i]._id%>?_method=PUT" method="POST">
+            <button class="btn btn-success">Approve</button>
+            </form>
+       </td>
+       <td> <form id="delete" action="/policy/get/<%= policy[i]._id %>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Deny</button> 
+    </form></td>
+    </tr>
+    <% }} %>
+    </tbody>
+</table>
+
+
+<%- include("partials/footer") %>

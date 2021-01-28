@@ -1,0 +1,61 @@
+<%- include("partials/nav", {user: user}) %>
+
+    <div class="col-md-6 m-auto">
+        <h1 class="text-center mb-3">Payment</h1>
+        <div class="card card-body">        
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Customer Name:</span>
+                </div>
+                <input type="text" id="phone" name="name" value="<%= user.name%>" readonly="true" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Policy Name:</span>
+                </div>
+                <input type="text" id="phone" name="name" value="<%= policy.name%>" readonly="true" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Policy Duration:</span>
+                </div>
+                <input type="text" id="phone" name="validity" value="<%= policy.validity%>" readonly="true" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+                <div class="input-group-append">
+                  <span class="input-group-text">years</span>
+                </div>
+            </div>
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">₹</span>
+                </div>
+                <input type="text" value="<%= policy.cost%>" readonly="true" class="form-control" name="cost" aria-label="Amount (to the nearest dollar)">
+                <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Card No</span>
+                </div>
+                <input type="text" id="phone" name="name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Expiry Date</span>
+                </div>
+                <input type="text" id="phone" name="name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+            <div class="input-group mb-3 form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">CVV</span>
+                </div>
+                <input type="password" id="phone" name="name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            </div>
+            <form action="/policy/select/<%= policy._id%>" method="GET">
+                <div class="text-center">
+                <button class="btn btn-primary">Confirm Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<%- include("partials/footer") %>
